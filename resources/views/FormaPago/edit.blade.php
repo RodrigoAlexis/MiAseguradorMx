@@ -1,0 +1,27 @@
+@extends('layouts.app')
+
+@section('content')
+@include('Icons.IconsCreateEdit')
+    <div class="container form-group">
+        <h1 class="text-center">Forma de pago</h1>
+        <form method="post" action="{{ url('/forma_pago/'.$forma_pago->id) }}">
+            {{ csrf_field() }}
+            {{ method_field('PATCH') }}
+            <div class="row">
+                <div class="col-12 col-lg-6 col-md-6 col-sm-6">
+                    <h5><label for="nombre">{{'Nombre'}}</label></h5>
+                    <input type="text" name="nombre" id="nombre" value="{{ $forma_pago->nombre }}" class="form-control  {{$errors->has('nombre')?'is-invalid':''}}" maxlength="30" pattern="[a-z,A-Z]{1,30}" title="Solo letras">
+                    {!! $errors->first('nombre','<div class="invalid-feedback alert alert-danger">:message</div>') !!}
+                </div>
+                <div class="col-12 col-lg-6 col-md-6 col-sm-6">
+                    <h5><label for="tiempo">{{'Tiempo'}}</label></h5>
+                    <input type="text" name="tiempo" id="tiempo"  value="{{$forma_pago->tiempo}}" class="form-control  {{$errors->has('tiempo')?'is-invalid':''}}" maxlength="2" pattern="[0-9]{1,2}" title="Solo numeros">
+                    {!! $errors->first('tiempo','<div class="invalid-feedback alert alert-danger">:message</div>') !!}
+                </div>
+            </div>
+        </br>
+                <button type="submit" class="btn btn-success" style="width:6em">Confirmar</button>&nbsp;
+                <a href="/forma_pago" class="btn btn-danger" style="width:6em">Cancelar</a>
+        </form>
+    </div>
+@endsection
